@@ -29,22 +29,7 @@ dependencies {
     compile project(':library-cortex')
     compile project(':library-minusandcortex')
 }
-/*
-gwt {
-    gwtVersion = '2.7.0'
 
-    compiler {
-        strict = true;
-        enableClosureCompiler = true;
-        disableClassMetadata = true;
-        disableCastChecking = true;
-    }
-
-    src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
-
-    //modules 'fr.mncc.showcase.blog.blog' //,'fr.mncc.showcase.landingpage.landingpage']
-}
-*/
 task blog(dependsOn: build) {
 
     println 'Building blog...'
