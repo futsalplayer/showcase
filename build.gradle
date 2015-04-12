@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'gwt'
+
+defaultTasks = ['war']
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+gwt {
+    gwtVersion='2.7.0'
+	
+	compiler {
+        strict = true;
+        enableClosureCompiler = true;
+        disableClassMetadata = true;
+        disableCastChecking = true;
+    }
+	
+    modules 'fr.mncc.showcase.showcase'
+}
