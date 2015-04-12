@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 MNCC
+ * Copyright (c) 2014 MNCC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,42 +18,39 @@
  *
  * @author http://www.mncc.fr
  */
-package fr.mncc.showcase.blog.client;
+package fr.mncc.showcase.landingpage.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import fr.mncc.minus.routes.client.Route;
-import fr.mncc.minus.routes.client.Router;
-import fr.mncc.showcase.shared.client.CustomRoute;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.ui.Widget;
 import fr.mncc.showcase.shared.client.assets.ShowcaseConstants;
+import fr.mncc.showcase.shared.client.widgets.Layout;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>
- */
-public class ModuleEntryPoint implements EntryPoint {
+public class LandingPage extends Layout {
 
-    /**
-     * This is the entry point method.
-     */
+    private static MyUiBinder uiBinder_ = GWT.create(MyUiBinder.class);
+    @UiField LandingPageResourceBundle res;
+    @UiField ShowcaseConstants cons;
+
+    public LandingPage() {
+        initWidget(uiBinder_.createAndBindUi(this));
+    }
+
     @Override
-    public void onModuleLoad() {
+    protected void onLoad() {
+        super.onLoad();
 
-        // Launch router
-        Router router = new Router();
+        // Set page title & description
+        setLayoutTitle(cons.landingPageTitle());
+        setLayoutDescription(cons.landingPageDescription());
 
-        // Declare new routes
-        Route routeBlog = new CustomRoute(ShowcaseConstants.INSTANCE.blogToken(), new Blog());
+        // Inject layout stylesheet
+        res.landingPageLayoutCssResource().ensureInjected();
+    }
 
-        // On routing failure redirect user to #!/home
-        router.setFallback(routeBlog);
-
-        // Register a few routes
-        router.add(routeBlog);
-
-        // Listen to History change events
-        router.listen();
-
-        // Try to redirect user to the current url address
-        // On failure, redirect user to #!/blog
-        router.loadFromBookmark("!/" + ShowcaseConstants.INSTANCE.blogToken());
+    @UiTemplate("LandingPage.ui.xml") interface MyUiBinder
+        extends UiBinder<Widget, LandingPage> {
     }
 }

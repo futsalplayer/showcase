@@ -18,42 +18,14 @@
  *
  * @author http://www.mncc.fr
  */
-package fr.mncc.showcase.blog.client;
+package fr.mncc.showcase.landingpage.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import fr.mncc.minus.routes.client.Route;
-import fr.mncc.minus.routes.client.Router;
-import fr.mncc.showcase.shared.client.CustomRoute;
-import fr.mncc.showcase.shared.client.assets.ShowcaseConstants;
+import fr.mncc.showcase.shared.client.assets.ShowcaseResourceBundle;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>
- */
-public class ModuleEntryPoint implements EntryPoint {
+public interface LandingPageResourceBundle extends ShowcaseResourceBundle {
 
-    /**
-     * This is the entry point method.
-     */
-    @Override
-    public void onModuleLoad() {
-
-        // Launch router
-        Router router = new Router();
-
-        // Declare new routes
-        Route routeBlog = new CustomRoute(ShowcaseConstants.INSTANCE.blogToken(), new Blog());
-
-        // On routing failure redirect user to #!/home
-        router.setFallback(routeBlog);
-
-        // Register a few routes
-        router.add(routeBlog);
-
-        // Listen to History change events
-        router.listen();
-
-        // Try to redirect user to the current url address
-        // On failure, redirect user to #!/blog
-        router.loadFromBookmark("!/" + ShowcaseConstants.INSTANCE.blogToken());
-    }
+    @Source({"fr/mncc/minus/purecss/client/assets/styles/pure/0.5.0/pure.gss",
+        "fr/mncc/minus/purecss/client/assets/styles/pure/0.5.0/grids-responsive.gss",
+        "fr/mncc/showcase/shared/client/assets/styles/LandingPageLayout.gss"})
+    LandingPageCssResource landingPageLayoutCssResource();
 }

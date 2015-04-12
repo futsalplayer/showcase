@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 MNCC
+ * Copyright (c) 2014 MNCC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -20,41 +20,33 @@
  */
 package fr.mncc.showcase.responsivemenu.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import fr.mncc.minus.routes.client.Route;
-import fr.mncc.minus.routes.client.Router;
-import fr.mncc.showcase.shared.client.CustomRoute;
-import fr.mncc.showcase.shared.client.assets.ShowcaseConstants;
-
 /**
- * Entry point classes define <code>onModuleLoad()</code>
+ * Annotate methods with @ClassName to rename a class at compile time.
  */
-public class ModuleEntryPoint implements EntryPoint {
+public interface SideMenuCssResource extends
+    fr.mncc.minus.purecss.client.PureCss {
 
-    /**
-     * This is the entry point method.
-     */
-    @Override
-    public void onModuleLoad() {
+    @ClassName("app-layout") String app_layout();
 
-        // Launch router
-        Router router = new Router();
+    @ClassName("app-menu") String app_menu();
 
-        // Declare new routes
-        Route routeSideMenu =
-            new CustomRoute(ShowcaseConstants.INSTANCE.sideMenuToken(), new SideMenu());
+    String content();
 
-        // On routing failure redirect user to #!/home
-        router.setFallback(routeSideMenu);
+    @ClassName("pure-menu-heading") String pure_menu_heading();
 
-        // Register a few routes
-        router.add(routeSideMenu);
+    @ClassName("content-subhead") String content_subhead();
 
-        // Listen to History change events
-        router.listen();
+    @ClassName("pure-img-responsive") String pure_img_responsive();
 
-        // Try to redirect user to the current url address
-        // On failure, redirect user to #!/sidemenu
-        router.loadFromBookmark("!/" + ShowcaseConstants.INSTANCE.sideMenuToken());
-    }
+    @ClassName("menu-link") String menu_link();
+
+    String active();
+
+    @ClassName("menu-item-divided") String menu_item_divided();
+
+    @ClassName("pure-menu") String pure_menu();
+
+    String header();
+
+    @ClassName("pure-menu-selected") String pure_menu_selected();
 }

@@ -2,17 +2,8 @@
         "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to="landingpage">
 
-    <!-- Inherit the core Web Toolkit stuff. -->
-    <inherits name='com.google.gwt.user.User'/>
-    <inherits name="com.google.gwt.resources.Resources"/>
-
-	<!-- Inherit shared stuff. -->
+    <!-- Inherit shared stuff. -->
     <inherits name='fr.mncc.showcase.shared.shared'/>
-	
-    <!-- Enable Gss with CssResource -->
-    <set-configuration-property name="CssResource.enableGss" value="true"/>
-    <set-configuration-property name="CssResource.legacy" value="true"/>
-    <set-configuration-property name="CssResource.conversionMode" value="strict"/>
 
     <!-- Specify the paths for translatable code -->
     <source path='client'/>

@@ -21,6 +21,10 @@
 package fr.mncc.showcase.landingpage.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import fr.mncc.minus.routes.client.Route;
+import fr.mncc.minus.routes.client.Router;
+import fr.mncc.showcase.shared.client.CustomRoute;
+import fr.mncc.showcase.shared.client.assets.ShowcaseConstants;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -33,5 +37,24 @@ public class ModuleEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
 
+        // Launch router
+        Router router = new Router();
+
+        // Declare new routes
+        Route routeLandingPage =
+            new CustomRoute(ShowcaseConstants.INSTANCE.landingPageToken(), new LandingPage());
+
+        // On routing failure redirect user to #!/home
+        router.setFallback(routeLandingPage);
+
+        // Register a few routes
+        router.add(routeLandingPage);
+
+        // Listen to History change events
+        router.listen();
+
+        // Try to redirect user to the current url address
+        // On failure, redirect user to #!/landingpage
+        router.loadFromBookmark("!/" + ShowcaseConstants.INSTANCE.landingPageToken());
     }
 }

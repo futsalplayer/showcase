@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'war'
 apply plugin: 'gwt'
 
-defaultTasks = ['war']
+webAppDirName = 'src/webapp'
 
 sourceSets {
     main {
@@ -24,15 +24,105 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    compile project(':library-minus')
+    compile project(':library-cortex')
+    compile project(':library-minusandcortex')
+}
+/*
 gwt {
-    gwtVersion='2.7.0'
-	
-	compiler {
+    gwtVersion = '2.7.0'
+
+    compiler {
         strict = true;
         enableClosureCompiler = true;
         disableClassMetadata = true;
         disableCastChecking = true;
     }
-	
-    modules 'fr.mncc.showcase.showcase'
+
+    src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
+
+    //modules 'fr.mncc.showcase.blog.blog' //,'fr.mncc.showcase.landingpage.landingpage']
 }
+*/
+task blog(dependsOn: build) {
+
+    println 'Building blog...'
+
+    gwt {
+        gwtVersion = '2.7.0'
+
+        compiler {
+            strict = true;
+            enableClosureCompiler = true;
+            disableClassMetadata = true;
+            disableCastChecking = true;
+        }
+
+        src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
+
+        modules 'fr.mncc.showcase.blog.blog'
+    }
+}
+
+task landingpage(dependsOn: build) {
+
+    println 'Building landingpage...'
+
+    gwt {
+        gwtVersion = '2.7.0'
+
+        compiler {
+            strict = true;
+            enableClosureCompiler = true;
+            disableClassMetadata = true;
+            disableCastChecking = true;
+        }
+
+        src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
+
+        modules 'fr.mncc.showcase.landingpage.landingpage'
+    }
+}
+
+task photogallery(dependsOn: build) {
+
+    println 'Building photogallery...'
+
+    gwt {
+        gwtVersion = '2.7.0'
+
+        compiler {
+            strict = true;
+            enableClosureCompiler = true;
+            disableClassMetadata = true;
+            disableCastChecking = true;
+        }
+
+        src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
+
+        modules 'fr.mncc.showcase.photogallery.photogallery'
+    }
+}
+
+task responsivemenu(dependsOn: build) {
+
+    println 'Building responsivemenu...'
+
+    gwt {
+        gwtVersion = '2.7.0'
+
+        compiler {
+            strict = true;
+            enableClosureCompiler = true;
+            disableClassMetadata = true;
+            disableCastChecking = true;
+        }
+
+        src += files(project(':library-cortex').sourceSets.main.java.srcDirs) + files(project(':library-minus').sourceSets.main.java.srcDirs) + files(project(':library-minusandcortex').sourceSets.main.java.srcDirs)
+
+        modules 'fr.mncc.showcase.responsivemenu.responsivemenu'
+    }
+}
+
+

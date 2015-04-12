@@ -1,0 +1,7 @@
+include 'cortex'
+include 'minus'
+include 'minusandcortex'
+
+rootProject.children.each { project ->
+    project.name = "library-${project.name}"
+}

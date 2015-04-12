@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 MNCC
+ * Copyright (c) 2011 MNCC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,42 +18,30 @@
  *
  * @author http://www.mncc.fr
  */
-package fr.mncc.showcase.blog.client;
+package fr.mncc.showcase.shared.client;
 
-import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.RootPanel;
 import fr.mncc.minus.routes.client.Route;
-import fr.mncc.minus.routes.client.Router;
-import fr.mncc.showcase.shared.client.CustomRoute;
-import fr.mncc.showcase.shared.client.assets.ShowcaseConstants;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>
- */
-public class ModuleEntryPoint implements EntryPoint {
+public class CustomRoute extends Route {
 
-    /**
-     * This is the entry point method.
-     */
+    private Composite layout_ = null;
+
+    public CustomRoute(String name, Composite layout) {
+        super(name);
+        layout_ = layout;
+    }
+
     @Override
-    public void onModuleLoad() {
+    public void enter(String arguments) {
+        if (layout_ != null) {
+            RootPanel.get().add(layout_);
+        }
+    }
 
-        // Launch router
-        Router router = new Router();
-
-        // Declare new routes
-        Route routeBlog = new CustomRoute(ShowcaseConstants.INSTANCE.blogToken(), new Blog());
-
-        // On routing failure redirect user to #!/home
-        router.setFallback(routeBlog);
-
-        // Register a few routes
-        router.add(routeBlog);
-
-        // Listen to History change events
-        router.listen();
-
-        // Try to redirect user to the current url address
-        // On failure, redirect user to #!/blog
-        router.loadFromBookmark("!/" + ShowcaseConstants.INSTANCE.blogToken());
+    @Override
+    public void leave() {
+        RootPanel.get().clear();
     }
 }
